@@ -14,9 +14,10 @@ class MyApp extends StatelessWidget {
       // home: HomePage(), this is always call below the routes
       themeMode: ThemeMode.light,
       theme: ThemeData(
-          primarySwatch: Colors.deepPurple,
-          fontFamily: GoogleFonts.lato().fontFamily,
-          primaryTextTheme: GoogleFonts.latoTextTheme()),
+        primarySwatch: Colors.deepPurple,
+        fontFamily: GoogleFonts.lato().fontFamily,
+        primaryTextTheme: GoogleFonts.latoTextTheme(),
+      ),
       darkTheme: ThemeData(brightness: Brightness.dark),
       // this line is override all themes
       initialRoute: "/login",
