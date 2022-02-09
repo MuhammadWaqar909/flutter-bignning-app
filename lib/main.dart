@@ -8,7 +8,8 @@ import 'Pages/LoginPage.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 // init your dependency injection here
-  runApp(MyApp());}
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -24,9 +25,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       darkTheme: ThemeData(brightness: Brightness.dark),
       // this line is override all themes
-      initialRoute: "/",
+      initialRoute: MyRoutes.homeRoutes,
       routes: <String, WidgetBuilder>{
-        "/":(context)=> LoginPage(),
+        "/": (context) => LoginPage(),
         MyRoutes.homeRoutes: (context) => HomePage(),
         MyRoutes.loginRoutes: (context) => LoginPage(),
       },
