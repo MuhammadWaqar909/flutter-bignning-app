@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_beginning_app/Model/Cataloge.dart';
+import 'package:flutter_beginning_app/utils/Themes.dart';
 import '../Widgets/ItemWidget.dart';
 import '../Widgets/Drawer.dart';
 
@@ -53,16 +54,29 @@ class _HomePageState extends State<HomePage> {
                     return Padding(
                         padding: EdgeInsets.all(10),
                         child: Card(
+                          elevation: 10,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8)),
                           clipBehavior: Clip.antiAlias,
                           child: GridTile(
                             child: Image.network(item.image),
-                            header: Text(
-                              item.name,
-                              style: TextStyle(fontWeight: FontWeight.w900),
+                            header: Container(
+                              padding: EdgeInsets.all(10),
+                              decoration:
+                                  BoxDecoration(color: MyTheme.creamColor),
+                              child: Text(
+                                item.name,
+                                style: TextStyle(fontWeight: FontWeight.w900),
+                              ),
                             ),
-                            footer: Text('\$${item.price}'.toString()),
+                            footer: Container(
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                    color: MyTheme.darkBluishColor),
+                                child: Text(
+                                  '\$${item.price}'.toString(),
+                                  style: TextStyle(color: Colors.white),
+                                )),
                           ),
                         ));
                   },

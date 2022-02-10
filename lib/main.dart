@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_beginning_app/Pages/HomePage2.dart';
 import 'package:flutter_beginning_app/utils/Themes.dart';
 import 'package:flutter_beginning_app/utils/routes/routes.dart';
 
-import 'package:google_fonts/google_fonts.dart';
+// import 'package:google_fonts/google_fonts.dart';
 import 'Pages/HomePage.dart';
 import 'Pages/LoginPage.dart';
 
@@ -20,9 +21,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       darkTheme: MyTheme.darkTheme(context),
       // this line is override all themes
-      initialRoute: MyRoutes.homeRoutes,
+      initialRoute: MyRoutes.home2Routes,
       routes: <String, WidgetBuilder>{
         "/": (context) => LoginPage(),
+        MyRoutes.home2Routes: (context) => HomePage2(),
         MyRoutes.homeRoutes: (context) => HomePage(),
         MyRoutes.loginRoutes: (context) => LoginPage(),
       },
