@@ -10,6 +10,7 @@ class ItemWidget extends StatelessWidget {
         margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         shape: StadiumBorder(),
         child: ListTile(
+          onTap: (() => print("Item Is Clicked")),
           leading: Image.network(item.image),
           title: Text(item.name),
           subtitle: Text(item.desc),

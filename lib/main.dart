@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_beginning_app/utils/Themes.dart';
 import 'package:flutter_beginning_app/utils/routes/routes.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'Pages/HomePage.dart';
 import 'Pages/LoginPage.dart';
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-// init your dependency injection here
+void main() async {
   runApp(MyApp());
 }
 
@@ -17,13 +16,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       // home: HomePage(), this is always call below the routes
       themeMode: ThemeMode.light,
-      theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
-        fontFamily: GoogleFonts.lato().fontFamily,
-        primaryTextTheme: GoogleFonts.latoTextTheme(),
-      ),
+      theme: MyTheme.ligthTheme(context),
       debugShowCheckedModeBanner: false,
-      darkTheme: ThemeData(brightness: Brightness.dark),
+      darkTheme: MyTheme.darkTheme(context),
       // this line is override all themes
       initialRoute: MyRoutes.homeRoutes,
       routes: <String, WidgetBuilder>{
