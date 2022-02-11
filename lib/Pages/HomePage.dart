@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_beginning_app/Model/Cataloge.dart';
 import 'package:flutter_beginning_app/utils/Themes.dart';
-import '../Widgets/ItemWidget.dart';
+// import '../Widgets/ItemWidget.dart';
 import '../Widgets/Drawer.dart';
 
 // ignore: must_be_immutable
@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
         title: Text("Wiki Products"),
       ),
       body: Padding(
-          child: (CatalogeModel.item != null && CatalogeModel.item.isNotEmpty)
+          child: (CatalogeModel.item.isNotEmpty)
               ? GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2),

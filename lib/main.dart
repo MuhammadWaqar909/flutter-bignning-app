@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_beginning_app/Pages/HomePage2.dart';
 import 'package:flutter_beginning_app/utils/Themes.dart';
 import 'package:flutter_beginning_app/utils/routes/routes.dart';
-
+// import 'Pages/ProductDetail.dart';
 // import 'package:google_fonts/google_fonts.dart';
 import 'Pages/HomePage.dart';
 import 'Pages/LoginPage.dart';

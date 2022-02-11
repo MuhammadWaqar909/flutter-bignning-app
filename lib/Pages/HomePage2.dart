@@ -1,11 +1,13 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_beginning_app/Model/Cataloge.dart';
+import 'package:flutter_beginning_app/Pages/ProductDetail.dart';
 import 'package:flutter_beginning_app/utils/Themes.dart';
 // import 'package:flutter_beginning_app/utils/Themes.dart';
-import '../Widgets/ItemWidget.dart';
+// import '../Widgets/ItemWidget.dart';
 // import '../Widgets/Drawer.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -27,7 +29,7 @@ class _HomePage2State extends State<HomePage2> {
   }
 
   loadData() async {
-    // await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 2));
     final catalogeString =
         await rootBundle.loadString("assets/file/Cataloge.json");
     final catalogeDecodeData = await jsonDecode(catalogeString);
@@ -46,7 +48,13 @@ class _HomePage2State extends State<HomePage2> {
         padding: Vx.m32,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [Header(), CatelogeList().expand()],
+          children: [
+            Header(),
+            if (CatalogeModel.item.isNotEmpty)
+              CatelogeList().expand()
+            else
+              CircularProgressIndicator().centered().py16().expand(),
+          ],
         ),
       ),
     );
@@ -60,7 +68,7 @@ class Header extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         "Catalogue App".text.xl5.bold.color(MyTheme.darkBluishColor).make(),
-        "Featured Products".text.xl2.make().py16()
+        "Featured Products".text.xl2.make().py12()
       ],
     );
   }
@@ -75,7 +83,14 @@ class CatelogeList extends StatelessWidget {
       itemCount: CatalogeModel.item.length,
       itemBuilder: (context, index) {
         final cataloge = CatalogeModel.item[index];
-        return CatalogeItem(cataloge: cataloge);
+        return InkWell(
+            onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ProductDetail(cataloge: cataloge))),
+            child: Hero(
+                tag: Key(cataloge.id.toString()),
+                child: CatalogeItem(cataloge: cataloge)));
       },
     );
   }
@@ -127,7 +142,13 @@ class BuyPriceWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         '\$${cataloge.price}'.text.xl.bold.make().w32(context),
-        ElevatedButton(onPressed: () {}, child: Text("Buy"))
+        ElevatedButton(
+            style: ButtonStyle(
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0)))),
+            onPressed: () {},
+            child: Icon(CupertinoIcons.cart_fill))
       ],
     );
   }
