@@ -1,11 +1,13 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_beginning_app/Model/Cataloge.dart';
 import 'package:flutter_beginning_app/utils/Themes.dart';
 // import '../Widgets/ItemWidget.dart';
 import '../Widgets/Drawer.dart';
+import '../utils/routes/routes.dart';
 
 // ignore: must_be_immutable
 class HomePage extends StatefulWidget {
@@ -38,6 +40,12 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        hoverColor: Colors.red,
+        backgroundColor: Colors.indigoAccent,
+        onPressed: () => {Navigator.pushNamed(context, MyRoutes.CartPage)},
+        child: Icon(CupertinoIcons.cart_fill_badge_plus),
+      ),
       // appBar: AppBar(title: Center(child: Text("Wiki Flutter App"))),
       // for center main title
       appBar: AppBar(
