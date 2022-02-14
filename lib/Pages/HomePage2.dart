@@ -4,7 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_beginning_app/Model/Cataloge.dart';
-import 'package:flutter_beginning_app/Pages/CartPage.dart';
+import 'package:flutter_beginning_app/Pages/AddItemButton.dart';
+// import 'package:flutter_beginning_app/Pages/CartPage.dart';
 import 'package:flutter_beginning_app/Pages/ProductDetail.dart';
 import 'package:flutter_beginning_app/utils/Themes.dart';
 import 'package:flutter_beginning_app/utils/routes/routes.dart';
@@ -75,7 +76,7 @@ class Header extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        "Catalogue App".text.xl5.bold.color(MyTheme.darkBluishColor).make(),
+        "Catalogue App".text.xl4.bold.color(MyTheme.darkBluishColor).make(),
         "Featured Products".text.xl2.make().py12()
       ],
     );
@@ -150,13 +151,7 @@ class BuyPriceWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         '\$${cataloge.price}'.text.xl.bold.make().w32(context),
-        ElevatedButton(
-            style: ButtonStyle(
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18.0)))),
-            onPressed: () {},
-            child: Icon(CupertinoIcons.cart_fill))
+        AddItemButton(cataloge: cataloge)
       ],
     );
   }
