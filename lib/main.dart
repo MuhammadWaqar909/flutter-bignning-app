@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_beginning_app/Pages/HomePage2.dart';
+import 'package:flutter_beginning_app/utils/Themes.dart';
+import 'Pages/CartPage.dart';
+import 'package:flutter_beginning_app/utils/routes/routes.dart';
+// import 'Pages/ProductDetail.dart';
+// import 'package:google_fonts/google_fonts.dart';
 import 'Pages/HomePage.dart';
 import 'Pages/LoginPage.dart';
 
-void main() {
+void main() async {
   runApp(MyApp());
 }
 
@@ -13,18 +18,17 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       // home: HomePage(), this is always call below the routes
       themeMode: ThemeMode.light,
-      theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
-        fontFamily: GoogleFonts.lato().fontFamily,
-        primaryTextTheme: GoogleFonts.latoTextTheme(),
-      ),
-      darkTheme: ThemeData(brightness: Brightness.dark),
+      theme: MyTheme.ligthTheme(context),
+      debugShowCheckedModeBanner: false,
+      darkTheme: MyTheme.darkTheme(context),
       // this line is override all themes
-      initialRoute: "/login",
-      routes: {
-        "/": (context) => HomePage(),
-        "/home": (context) => HomePage(),
-        "/login": (context) => LoginPage(),
+      initialRoute: MyRoutes.home2Routes,
+      routes: <String, WidgetBuilder>{
+        "/": (context) => LoginPage(),
+        MyRoutes.home2Routes: (context) => HomePage2(),
+        MyRoutes.CartPage: (context) => CartPage(),
+        MyRoutes.homeRoutes: (context) => HomePage(),
+        MyRoutes.loginRoutes: (context) => LoginPage(),
       },
     );
   }
