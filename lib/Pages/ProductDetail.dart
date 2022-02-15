@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_beginning_app/Pages/AddItemButton.dart';
 
-import 'package:flutter_beginning_app/utils/Themes.dart';
+// import 'package:flutter_beginning_app/utils/Themes.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class ProductDetail extends StatelessWidget {
@@ -19,22 +20,7 @@ class ProductDetail extends StatelessWidget {
           buttonPadding: EdgeInsets.zero,
           children: [
             '\$${cataloge.price}'.text.bold.xl4.color(Colors.deepPurple).make(),
-            ElevatedButton(
-                style: ButtonStyle(
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18.0)))),
-                onPressed: () {},
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Buy",
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    Icon(CupertinoIcons.cart)
-                  ],
-                )).wh(100, 50)
+            AddItemButton(cataloge: cataloge).w24(context).h(45)
           ],
         ).p24(),
       ),
