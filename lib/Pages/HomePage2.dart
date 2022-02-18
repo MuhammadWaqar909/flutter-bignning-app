@@ -68,6 +68,15 @@ class _HomePage2State extends State<HomePage2> {
     final _cart = (VxState.store as MyStore).cart;
     VxState.watch(context, on: [AddMutation, RemoveMutation]);
     return Scaffold(
+      appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          title: ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, MyRoutes.loginRoutes);
+              },
+              child: Row(
+                children: [Icon(Icons.arrow_back), Text("Logout")],
+              )).w(110)),
       floatingActionButton: VxBuilder(
         builder: ((context, store, status) => FloatingActionButton(
               hoverColor: Colors.red,
@@ -84,7 +93,7 @@ class _HomePage2State extends State<HomePage2> {
       ),
       backgroundColor: context.canvasColor,
       body: Container(
-        margin: EdgeInsets.only(top: 24),
+        // margin: EdgeInsets.only(top: 24),
         padding: Vx.m32,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

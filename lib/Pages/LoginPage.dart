@@ -1,4 +1,5 @@
 // import 'package:flutter_svg/flutter_svg.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_beginning_app/utils/routes/routes.dart';
 
@@ -12,7 +13,7 @@ class _LoginPageState extends State<LoginPage> {
   bool focusInput = false;
   final _formKey = GlobalKey<FormState>();
 
-  movetoHome(BuildContext context) async {
+  Future movetoHome(BuildContext context) async {
     print('out Condition ....');
     if (_formKey.currentState!.validate()) {
       print('In Condition ....');
@@ -41,7 +42,7 @@ class _LoginPageState extends State<LoginPage> {
                       fit: BoxFit.cover,
                     ),
                     Text(
-                      !focusInput ? "Welcome to login page" : "Welcome $name",
+                      focusInput ? "Welcome to $name" : "Welcome to login page",
                       style: (TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 15,
