@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types
+
 import 'package:flutter/material.dart';
 import 'package:flutter_beginning_app/Model/CartModel.dart';
 import 'package:flutter_beginning_app/utils/Themes.dart';
@@ -33,7 +35,17 @@ class _priceWidget extends StatelessWidget {
     return SizedBox(
       height: 100,
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-        "\$${_cart.totalPrice}".text.xl4.color(MyTheme.darkBluishColor).make(),
+        VxConsumer(
+          builder: ((context, store, status) {
+            return "\$${_cart.totalPrice}"
+                .text
+                .xl4
+                .color(MyTheme.darkBluishColor)
+                .make();
+          }),
+          mutations: {RemoveMutation},
+          notifications: {},
+        ),
         ElevatedButton(
           onPressed: () {
             ScaffoldMessenger.of(context).showSnackBar(
@@ -51,7 +63,12 @@ class _priceWidget extends StatelessWidget {
   }
 }
 
-class _cartList extends StatelessWidget {
+class _cartList extends StatefulWidget {
+  @override
+  State<_cartList> createState() => _cartListState();
+}
+
+class _cartListState extends State<_cartList> {
   @override
   Widget build(BuildContext context) {
     final CartModel _cart = (VxState.store as MyStore).cart;
@@ -71,30 +88,36 @@ class _cartList extends StatelessWidget {
         : ListView.builder(
             itemCount: _cart.items.length,
             shrinkWrap: true,
-            itemBuilder: (context, index) => Container(
+            itemBuilder: (context, index) => Column(
                   // color: MyTheme.darkBluishColor,
-                  child: Card(
-                    color: MyTheme.darkBluishColor,
-                    margin: EdgeInsets.all(10),
-                    child: ListTile(
-                        leading: Icon(
-                          Icons.done,
-                          color: Colors.lightGreenAccent,
-                        ),
-                        title: "${_cart.items[index].name}"
-                            .text
-                            .color(MyTheme.creamColor)
-                            .white
-                            .xl2
-                            .make(),
-                        trailing: IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.remove_circle_outline,
-                            color: Colors.redAccent,
+                  children: [
+                    // VxConsumer(builder: builder, mutations: , notifications: notifications)
+                    Card(
+                      color: MyTheme.darkBluishColor,
+                      margin: EdgeInsets.all(10),
+                      child: ListTile(
+                          leading: Icon(
+                            Icons.done,
+                            color: Colors.lightGreenAccent,
                           ),
-                        )).py2(),
-                  ),
+                          title: "${_cart.items[index].name}"
+                              .text
+                              .color(MyTheme.creamColor)
+                              .white
+                              .xl2
+                              .make(),
+                          trailing: IconButton(
+                            onPressed: () {
+                              RemoveMutation(_cart.items[index]);
+                              setState(() {});
+                            },
+                            icon: Icon(
+                              Icons.remove_circle_outline,
+                              color: Colors.redAccent,
+                            ),
+                          )).py2(),
+                    )
+                  ],
                 ));
   }
 }

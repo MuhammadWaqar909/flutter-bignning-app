@@ -10,7 +10,6 @@ class Item {
   final String name;
   final String desc;
   final num price;
-  final String color;
   final String image;
 
   Item(
@@ -18,20 +17,25 @@ class Item {
       required this.name,
       required this.desc,
       required this.price,
-      required this.color,
       required this.image});
 
-  // ignore: empty_constructor_bodies
-  // below line  is map to class
   factory Item.fromMap(Map<String, dynamic> map) {
     return Item(
-      id: map["id"],
-      name: map["name"],
+      id: map["product_id"],
+      name: map["product_name"],
       price: map["price"],
-      color: map["color"],
-      desc: map["desc"],
-      image: map["image"],
+      desc: map["product_name"],
+      image: map["product_image"],
     );
+    // factory Item.fromMap(Map<String, dynamic> map) {
+    //   return Item(
+    //     id: map["id"],
+    //     name: map["name"],
+    //     price: map["price"],
+    //     color: map["color"],
+    //     desc: map["desc"],
+    //     image: map["image"],
+    //   );
   }
 
   // for import map data
@@ -40,7 +44,6 @@ class Item {
         "id": id,
         "name": name,
         "price": price,
-        "color": color,
         "desc": desc,
         "image": image,
       };

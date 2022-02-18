@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         hoverColor: Colors.red,
         backgroundColor: Colors.indigoAccent,
-        onPressed: () => {Navigator.pushNamed(context, MyRoutes.CartPage)},
+        onPressed: () => {Navigator.pushNamed(context, MyRoutes.cartPage)},
         child: Icon(CupertinoIcons.cart_fill_badge_plus),
       ),
       // appBar: AppBar(title: Center(child: Text("Wiki Flutter App"))),

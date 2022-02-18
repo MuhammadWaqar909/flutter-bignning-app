@@ -7,12 +7,16 @@ import 'package:flutter_beginning_app/Model/Cataloge.dart';
 import 'package:flutter_beginning_app/Pages/AddItemButton.dart';
 // import 'package:flutter_beginning_app/Pages/CartPage.dart';
 import 'package:flutter_beginning_app/Pages/ProductDetail.dart';
+import 'package:flutter_beginning_app/core/Store.dart';
 import 'package:flutter_beginning_app/utils/Themes.dart';
 import 'package:flutter_beginning_app/utils/routes/routes.dart';
 // import 'package:flutter_beginning_app/utils/Themes.dart';
 // import '../Widgets/ItemWidget.dart';
 // import '../Widgets/Drawer.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:http/http.dart' as http;
+
+import '../Model/CartModel.dart';
 
 // ignore: must_be_immutable
 class HomePage2 extends StatefulWidget {
@@ -24,6 +28,7 @@ class _HomePage2State extends State<HomePage2> {
   int count = 22;
 
   final name = 'Wiki First App';
+  final url = "https://stage.zab.ee/api/getProduct/featured";
 
   @override
   void initState() {
@@ -31,25 +36,51 @@ class _HomePage2State extends State<HomePage2> {
     loadData();
   }
 
-  loadData() async {
+  Future loadData() async {
     await Future.delayed(Duration(seconds: 2));
     final catalogeString =
-        await rootBundle.loadString("assets/file/Cataloge.json");
+        await rootBundle.loadString("assets/file/Cataloge2.json");
     final catalogeDecodeData = await jsonDecode(catalogeString);
-    var productData = catalogeDecodeData["products"];
-    CatalogeModel.item =
-        List.from(productData).map<Item>((item) => Item.fromMap(item)).toList();
+
+    CatalogeModel.item = List.from(catalogeDecodeData)
+        .map<Item>((item) => Item.fromMap(item))
+        .toList();
     setState(() {});
+
+    // is for api Call to extract data
+    // final url = "https://stage.zab.ee/api/getProduct/featured";
+    // final responce = await http.get(Uri.parse(url));
+    // final catalogeData = await responce.body;
+    // print("checking 1 ...");
+    // print(catalogeData);
+    // final catalogeDecodeData = await jsonDecode(catalogeData);
+    // print("checking 2 .....");
+    // print("this Cataloge Decode Data \n\n$catalogeDecodeData");
+    // // var productData = catalogeDecodeData["products"];
+    // CatalogeModel.item = List.from(catalogeDecodeData)
+    //     .map<Item>((item) => Item.fromMap(item))
+    //     .toList();
+    // setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
+    final _cart = (VxState.store as MyStore).cart;
+    VxState.watch(context, on: [AddMutation, RemoveMutation]);
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        hoverColor: Colors.red,
-        backgroundColor: Colors.indigoAccent,
-        onPressed: () => {Navigator.pushNamed(context, MyRoutes.CartPage)},
-        child: Icon(CupertinoIcons.cart_fill_badge_plus),
+      floatingActionButton: VxBuilder(
+        builder: ((context, store, status) => FloatingActionButton(
+              hoverColor: Colors.red,
+              backgroundColor: Colors.indigoAccent,
+              onPressed: () =>
+                  {Navigator.pushNamed(context, MyRoutes.cartPage)},
+              child: Icon(CupertinoIcons.cart_fill_badge_plus),
+            ).badge(
+                size: 22,
+                count: _cart.items.length,
+                color: Vx.green300,
+                textStyle: TextStyle(color: Colors.black))),
+        mutations: {AddMutation, RemoveMutation},
       ),
       backgroundColor: context.canvasColor,
       body: Container(
@@ -115,7 +146,7 @@ class CatalogeItem extends StatelessWidget {
       child: VxBox(
           child: Row(
         children: [
-          Image.network(cataloge.image).box.make().py(16).w32(context),
+          Image.network(cataloge.image).box.make().px8().w32(context),
           Expanded(
               child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -125,17 +156,22 @@ class CatalogeItem extends StatelessWidget {
                   .textStyle(TextStyle(color: MyTheme.darkBluishColor))
                   .bold
                   .lg
-                  .make(),
+                  .overflow(TextOverflow.fade)
+                  .make()
+                  .h(24)
+                  .px8(),
               cataloge.desc.text
                   .textStyle(
                       TextStyle(color: Color.fromARGB(255, 172, 175, 140)))
+                  .overflow(TextOverflow.fade)
                   .make()
-                  .wHalf(context),
+                  .h8(context)
+                  .px8(),
               BuyPriceWidget(cataloge: cataloge)
             ],
           ))
         ],
-      )).white.roundedSM.square(150).make().py16(),
+      )).white.roundedSM.square(150).make().py16().wHalf(context),
     );
   }
 }
@@ -148,9 +184,9 @@ class BuyPriceWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        '\$${cataloge.price}'.text.xl.bold.make().w32(context),
+        '\$${cataloge.price}'.text.xl.bold.make(),
         AddItemButton(cataloge: cataloge)
       ],
     );

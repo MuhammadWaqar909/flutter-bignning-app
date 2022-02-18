@@ -3,6 +3,7 @@ import 'package:flutter_beginning_app/Pages/HomePage2.dart';
 import 'package:flutter_beginning_app/core/Store.dart';
 import 'package:flutter_beginning_app/utils/Themes.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'Model/CartModel.dart';
 import 'Pages/CartPage.dart';
 import 'package:flutter_beginning_app/utils/routes/routes.dart';
 // import 'Pages/ProductDetail.dart';
@@ -12,6 +13,7 @@ import 'Pages/LoginPage.dart';
 
 void main() async {
   runApp(VxState(store: MyStore(), child: MyApp()));
+  VxState.streamOf(AddMutation);
 }
 
 class MyApp extends StatelessWidget {
@@ -28,7 +30,7 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         "/": (context) => LoginPage(),
         MyRoutes.home2Routes: (context) => HomePage2(),
-        MyRoutes.CartPage: (context) => CartPage(),
+        MyRoutes.cartPage: (context) => CartPage(),
         MyRoutes.homeRoutes: (context) => HomePage(),
         MyRoutes.loginRoutes: (context) => LoginPage(),
       },

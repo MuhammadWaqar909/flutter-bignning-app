@@ -8,6 +8,7 @@ class CartModel {
   // Collection of id fields store in _itemIds
   final List<int> _itemIds = [];
 
+  // ignore: unnecessary_getters_setters
   CatalogeModel get cataloge => _cataloge;
 
   set cataloge(CatalogeModel newcataloge) {
@@ -37,5 +38,14 @@ class AddMutation extends VxMutation<MyStore> {
   @override
   perform() {
     store?.cart._itemIds.add(item.id);
+  }
+}
+
+class RemoveMutation extends VxMutation<MyStore> {
+  final Item item;
+  RemoveMutation(this.item);
+  @override
+  perform() {
+    store?.cart._itemIds.remove(item.id);
   }
 }

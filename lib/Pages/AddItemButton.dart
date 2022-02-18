@@ -6,7 +6,7 @@ import 'package:velocity_x/velocity_x.dart';
 import '../Model/CartModel.dart';
 import '../Model/Cataloge.dart';
 
-class AddItemButton extends StatelessWidget {
+class AddItemButton extends StatefulWidget {
   final Item cataloge;
   AddItemButton({
     Key? key,
@@ -14,13 +14,16 @@ class AddItemButton extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<AddItemButton> createState() => _AddItemButtonState();
+}
+
+class _AddItemButtonState extends State<AddItemButton> {
+  @override
   Widget build(BuildContext context) {
-    VxState.events.listen((event) {
-      to:
-      [AddMutation];
-    });
+    VxState.watch(context, on: [AddMutation, RemoveMutation]);
+
     final CartModel _cart = (VxState.store as MyStore).cart;
-    bool isAdd = _cart.items.contains(cataloge) ? true : false;
+    bool isAdd = _cart.items.contains(widget.cataloge) ? true : false;
     return ElevatedButton(
         style: ButtonStyle(
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -31,9 +34,11 @@ class AddItemButton extends StatelessWidget {
             isAdd = isAdd.toggle();
             final _cataloge = CatalogeModel();
             _cart.cataloge = _cataloge;
-            AddMutation(cataloge);
+            AddMutation(widget.cataloge);
+            setState(() {});
             print("pressed 1" + "1");
           }
+          setState(() {});
         },
         child: isAdd ? Icon(Icons.done) : Icon(CupertinoIcons.cart_fill));
   }
