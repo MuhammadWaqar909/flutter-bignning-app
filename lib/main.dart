@@ -1,4 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_beginning_app/Pages/HomePage2.dart';
 import 'package:flutter_beginning_app/core/Store.dart';
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
       darkTheme: MyTheme.darkTheme(context),
       // this line is override all themes
       initialRoute: MyRoutes.loginRoutes,
-      
+
       routes: <String, WidgetBuilder>{
         "/": (context) => LoginPage(),
         MyRoutes.home2Routes: (context) => HomePage2(),

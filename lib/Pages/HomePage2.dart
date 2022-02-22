@@ -72,10 +72,10 @@ class _HomePage2State extends State<HomePage2> {
           backgroundColor: Colors.transparent,
           title: ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, MyRoutes.loginRoutes);
+                Navigator.pop(context, MyRoutes.loginRoutes);
               },
               child: Row(
-                children: [Icon(Icons.arrow_back), Text("Logout")],
+                children: [Text("Logout")],
               )).w(110)),
       floatingActionButton: VxBuilder(
         builder: ((context, store, status) => FloatingActionButton(

@@ -21,7 +21,7 @@ class _LoginPageState extends State<LoginPage> {
             focusInput = true,
           });
       await Future.delayed(Duration(seconds: 1));
-      await Navigator.pushNamed(context, MyRoutes.homeRoutes);
+      await Navigator.pushNamed(context, MyRoutes.home2Routes);
       setState(() => {
             focusInput = false,
           });
