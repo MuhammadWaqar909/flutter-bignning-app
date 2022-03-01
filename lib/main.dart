@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       darkTheme: MyTheme.darkTheme(context),
       // this line is override all themes
-      initialRoute: MyRoutes.loginRoutes,
+      initialRoute: MyRoutes.homeRoutes,
 
       routes: <String, WidgetBuilder>{
         "/": (context) => LoginPage(),

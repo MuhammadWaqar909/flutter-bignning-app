@@ -39,7 +39,7 @@ class _HomePage2State extends State<HomePage2> {
   Future loadData() async {
     await Future.delayed(Duration(seconds: 2));
     final catalogeString =
-        await rootBundle.loadString("assets/file/Cataloge2.json");
+        await rootBundle.loadString("assets/file/Cataloge.json");
     final catalogeDecodeData = await jsonDecode(catalogeString);
 
     CatalogeModel.item = List.from(catalogeDecodeData)

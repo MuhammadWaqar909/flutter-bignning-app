@@ -21,11 +21,11 @@ class Item {
 
   factory Item.fromMap(Map<String, dynamic> map) {
     return Item(
-      id: map["product_id"],
-      name: map["product_name"],
+      id: map["id"],
+      name: map["name"],
       price: map["price"],
-      desc: map["product_name"],
-      image: map["product_image"],
+      desc: map["desc"],
+      image: map["image"],
     );
     // factory Item.fromMap(Map<String, dynamic> map) {
     //   return Item(
